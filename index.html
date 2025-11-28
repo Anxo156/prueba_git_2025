@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Example — Prueba Git</title>
+    <style>
+        :root{
+            --bg:#f7f9fc; --card:#fff; --text:#0f1724; --muted:#6b7280; --accent:#2563eb;
+        }
+        *{box-sizing:border-box}
+        body{
+            margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background:var(--bg); color:var(--text); line-height:1.4; padding:24px;
+        }
+        .wrap{max-width:900px;margin:0 auto}
+        header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+        h1{font-size:1.25rem;margin:0}
+        nav a{color:var(--accent);text-decoration:none;margin-left:12px;font-size:.95rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+        .card{background:var(--card);padding:16px;border-radius:8px;box-shadow:0 1px 2px rgba(2,6,23,.06)}
+        .muted{color:var(--muted);font-size:.95rem}
+        .btn{display:inline-block;padding:8px 12px;border-radius:6px;background:var(--accent);color:white;text-decoration:none;border:none;cursor:pointer}
+        form label{display:block;font-weight:600;margin-top:8px}
+        input, textarea, select{width:100%;padding:8px;margin-top:6px;border:1px solid #e6e9ef;border-radius:6px;font-size:0.95rem}
+        footer{margin-top:28px;font-size:.85rem;color:var(--muted)}
+        .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+        .theme-dark{
+            --bg:#0b1220; --card:#071126; --text:#e6eef8; --muted:#9fb0d1; --accent:#60a5fa;
+        }
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    </style>
+</head>
+<body>
+    <div class="wrap" id="page">
+        <header>
+            <div>
+                <h1>Exemple — Prueba</h1>
+                <div class="muted">Small starter page for a web project</div>
+            </div>
+            <div class="controls">
+                <button id="themeBtn" class="btn" aria-pressed="false">Toggle theme</button>
+                <nav aria-label="Main">
+                    <a href="#components">Components</a>
+                    <a href="#form">Form</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="card" id="intro">
+                <h2 style="margin-top:0">Quick overview</h2>
+                <p class="muted">This is a minimal, accessible example index.html you can use to start a project. It includes layout, basic components and tiny client-side behavior.</p>
+            </section>
+
+            <section class="grid" id="components" style="margin-top:16px">
+                <article class="card">
+                    <h3>Buttons</h3>
+                    <p class="muted">Primary and secondary actions.</p>
+                    <div style="display:flex;gap:8px;margin-top:12px">
+                        <button class="btn" id="demoAlert">Show alert</button>
+                        <button class="btn" id="demoLog" style="background:#10b981">Console log</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Card example</h3>
+                    <p class="muted">Cards are simple containers for grouped content.</p>
+                    <div style="margin-top:12px">
+                        <strong>Title</strong>
+                        <p class="muted" style="margin:6px 0 0 0">Supporting text and a short description live here.</p>
+                    </div>
+                </article>
+            </section>
+
+            <section class="card" id="form" style="margin-top:16px">
+                <h3 style="margin-top:0">Contact form</h3>
+                <form id="contactForm" novalidate>
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" required placeholder="Your name">
+
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required placeholder="you@example.com">
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Write a short message"></textarea>
+
+                    <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+                        <button type="submit" class="btn">Send</button>
+                        <button type="reset" class="btn" style="background:#ef4444">Reset</button>
+                        <span id="formStatus" class="muted" aria-live="polite" style="margin-left:8px"></span>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <div class="muted">© Example project — built with a simple static HTML template</div>
+        </footer>
+    </div>
+
+    <script>
+        // Small interactive behaviors: theme toggle, demo actions and form handling.
+        (function(){
+            const page = document.getElementById('page');
+            const themeBtn = document.getElementById('themeBtn');
+            const demoAlert = document.getElementById('demoAlert');
+            const demoLog = document.getElementById('demoLog');
+            const form = document.getElementById('contactForm');
+            const status = document.getElementById('formStatus');
+
+            themeBtn.addEventListener('click', () => {
+                const dark = page.classList.toggle('theme-dark');
+                themeBtn.setAttribute('aria-pressed', String(dark));
+            });
+
+            demoAlert.addEventListener('click', () => alert('Hello — this is a demo alert.'));
+            demoLog.addEventListener('click', () => console.log('Demo log at', new Date().toISOString()));
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = new FormData(form);
+                if (!data.get('name') || !data.get('email')) {
+                    status.textContent = 'Please fill required fields.';
+                    status.style.color = '#ef4444';
+                    return;
+                }
+                // Simulate success
+                status.style.color = '';
+                status.textContent = 'Message sent (simulated). Thank you!';
+                form.reset();
+            });
+        })();
+    </script>
+</body>
+</html></div></article>
