@@ -7,3 +7,5 @@ Si Dios non quere, vamos suspender
 
 # Cambio
 Mais cambios (ahora feitos en main):(
+
+Metemos nova informacion 2.0
